@@ -13,7 +13,9 @@
     <p>
         Published on: @Html.DisplayFor(model => model.PublishedOn)
     </p>
-    @Html.Partial("Unfollow", Model.Publisher.Id)
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
-</div>
+    <div>
+        @Html.Partial("Unfollow", Model.Publisher.Id)
+    </div>
+    @Html.ActionLink("Edit", "Edit", "Post", new { id = Model.Id }, null) |
+    @Html.ActionLink("Delete", "Delete", "Post", new { id = Model.Id }, null)
+    </div>

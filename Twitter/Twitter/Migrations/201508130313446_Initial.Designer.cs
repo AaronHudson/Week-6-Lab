@@ -13,7 +13,7 @@ namespace Twitter.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201508090008481_Initial"; }
+            get { return "201508130313446_Initial"; }
         }
         
         string IMigrationMetadata.Source

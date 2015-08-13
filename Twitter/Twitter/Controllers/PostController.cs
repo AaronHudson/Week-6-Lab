@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,9 +24,11 @@ namespace Twitter.Controllers
         [HttpPost]
         public ActionResult New(Post post)
         {
-            TwitterDB.Posts.Attach(post);
+            string ID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            post.PublishedOn = DateTime.Now;
+            post.Publisher = TwitterDB.Users.SingleOrDefault(x => x.Id == ID);
             TwitterDB.Posts.Add(post);
-            TwitterDB.Users.Find(Membership.GetUser().ProviderUserKey.ToString()).Posts.Add(TwitterDB.Posts.Find(post.Id));
+            TwitterDB.Users.Find(ID).Posts.Add(TwitterDB.Posts.Find(post.Id));
             TwitterDB.SaveChanges();
             return RedirectToAction("StartPage", "Twitter");
         }
@@ -39,7 +43,6 @@ namespace Twitter.Controllers
         {
             TwitterDB.Posts.Attach(post);
             TwitterDB.Posts.Remove(post);
-            TwitterDB.Users.Find(Membership.GetUser().ProviderUserKey.ToString()).Posts.Remove(TwitterDB.Posts.Find(post.Id));
             TwitterDB.SaveChanges();
 
             return RedirectToAction("StartPage", "Twitter");
@@ -53,7 +56,10 @@ namespace Twitter.Controllers
         [HttpPost]
         public ActionResult Edit(Post post)
         {
-            TwitterDB.Posts.Remove(TwitterDB.Posts.Find(post.Id));
+            Post oldPost = TwitterDB.Posts.FirstOrDefault(x => x.Id == post.Id);
+            post.PublishedOn = oldPost.PublishedOn;
+            post.Publisher = oldPost.Publisher;
+            TwitterDB.Posts.Remove(oldPost);
             TwitterDB.Posts.Add(post);
             TwitterDB.SaveChanges();
             return RedirectToAction("StartPage", "Twitter");

@@ -38,12 +38,12 @@ namespace Twitter.Models
         public virtual DbSet<Post> Posts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TwitterUser>()
-                .HasMany(m => m.Followers)
-                .WithMany(p => p.Following)
-                .Map(w => w.ToTable("User_Follow")
-                .MapLeftKey("UserId")
-                .MapRightKey("FollowerID"));
+            //modelBuilder.Entity<TwitterUser>()
+            //    .HasMany(m => m.Followers)
+            //    .WithMany(p => p.Following)
+            //    .Map(w => w.ToTable("User_Follow")
+            //    .MapLeftKey("UserId")
+            //    .MapRightKey("FollowerID"));
             base.OnModelCreating(modelBuilder);
         }
     }

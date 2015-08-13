@@ -13,30 +13,31 @@
         <br />
     }
 </div>
-@section scripts { 
+@section scripts {
     <script>
-        //$("div.follow").click(function () 
-        $('.container').on('click', '.unfollow', function () {
-                $.ajax({
-                    method: "POST",
-                    url: "@Url.Action("Follow", "Twitter")",
-                    data: { id: $(this).data("id") }
-                }).done(function (msg) {
-                    $(this).html(msg);
-                }
-                )
-            })
-     //   $("div.unfollow").click(function ()
-        $('.container').on('click', '.unfollow', function ()
-         {
+        $("div.follow").click(function ()
+        //        $('.container').live('click', '.follow', function ()
+        {
+            var that = $(this);
             $.ajax({
                 method: "POST",
+                url: "@Url.Action("Follow", "Twitter")",
+                data: { id: $(this).data("id") }
+            }).done(function (msg) {
+                that.replaceWith(msg);
+            })
+        })
+       $("div.unfollow").click(function ()
+       //       $('.container').live('click', '.unfollow', function ()
+        {
+            var that = $(this);
+            $.ajax({
+                method: "post",
                 url: "@Url.Action("Unfollow", "Twitter")",
                 data: { id: $(this).data("id") }
-        }).done(function (msg) {
-            $(this).html(msg);
-        }
-    )
-        })
+            }).done(function (msg) {
+                that.replaceWith(msg);
+            });
+        });
     </script>
 }

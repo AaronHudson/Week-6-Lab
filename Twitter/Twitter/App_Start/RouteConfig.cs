@@ -14,16 +14,34 @@ namespace Twitter
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Create",
+                name: "New",
                 url: "Post/New",
-                defaults: new { controller = "Post", action = "Create" }
+                defaults: new { controller = "Post", action = "New", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "Create",
+                url: "Post/Create",
+                defaults: new { controller = "Post", action = "New", id = UrlParameter.Optional }
                 );
 
             routes.MapRoute(
                 name: "Pagination",
                 url: "Post/{id}",
-                defaults: new { controller = "Post", action = "Details" }
+                defaults: new { controller = "Post", action = "Details", id = 0}
                 );
+
+            routes.MapRoute(
+                name: "Details",
+                url: "Post/Details/{id}",
+                defaults: new { controller = "Post", action = "Details", id = 0 }
+                );
+
+            routes.MapRoute(
+             name: "defaultforposts",
+                url: "Post/{action}/{id}",
+              defaults: new { controller = "Post", id = UrlParameter.Optional }
+              );
 
             routes.MapRoute(
                 name: "Default",

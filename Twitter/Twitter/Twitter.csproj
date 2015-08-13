@@ -174,37 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201508090008481_Initial.cs" />
-    <Compile Include="Migrations\201508090008481_Initial.Designer.cs">
-      <DependentUpon>201508090008481_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508091810221_FinishedOutModels.cs" />
-    <Compile Include="Migrations\201508091810221_FinishedOutModels.Designer.cs">
-      <DependentUpon>201508091810221_FinishedOutModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508091940242_ChangedToICollection.cs" />
-    <Compile Include="Migrations\201508091940242_ChangedToICollection.Designer.cs">
-      <DependentUpon>201508091940242_ChangedToICollection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508092251105_Something.cs" />
-    <Compile Include="Migrations\201508092251105_Something.Designer.cs">
-      <DependentUpon>201508092251105_Something.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508092311528_Fixes.cs" />
-    <Compile Include="Migrations\201508092311528_Fixes.Designer.cs">
-      <DependentUpon>201508092311528_Fixes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508092342488_Attempt.cs" />
-    <Compile Include="Migrations\201508092342488_Attempt.Designer.cs">
-      <DependentUpon>201508092342488_Attempt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508100012447_ModelBuilder.cs" />
-    <Compile Include="Migrations\201508100012447_ModelBuilder.Designer.cs">
-      <DependentUpon>201508100012447_ModelBuilder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201508100019419_ForgotModelBuilder.cs" />
-    <Compile Include="Migrations\201508100019419_ForgotModelBuilder.Designer.cs">
-      <DependentUpon>201508100019419_ForgotModelBuilder.cs</DependentUpon>
+    <Compile Include="Migrations\201508130313446_Initial.cs" />
+    <Compile Include="Migrations\201508130313446_Initial.Designer.cs">
+      <DependentUpon>201508130313446_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -236,7 +208,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -290,29 +264,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508090008481_Initial.resx">
-      <DependentUpon>201508090008481_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508091810221_FinishedOutModels.resx">
-      <DependentUpon>201508091810221_FinishedOutModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508091940242_ChangedToICollection.resx">
-      <DependentUpon>201508091940242_ChangedToICollection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508092251105_Something.resx">
-      <DependentUpon>201508092251105_Something.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508092311528_Fixes.resx">
-      <DependentUpon>201508092311528_Fixes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508092342488_Attempt.resx">
-      <DependentUpon>201508092342488_Attempt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508100012447_ModelBuilder.resx">
-      <DependentUpon>201508100012447_ModelBuilder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508100019419_ForgotModelBuilder.resx">
-      <DependentUpon>201508100019419_ForgotModelBuilder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508130313446_Initial.resx">
+      <DependentUpon>201508130313446_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -18,7 +18,8 @@ namespace Twitter.Controllers
 
         public ActionResult StartPage()
         {
-            TwitterUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            string ID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            TwitterUser user = TwitterDB.Users.SingleOrDefault(x => x.Id == ID);
             List<Post> postFeed = new List<Post>();
             postFeed.AddRange(TwitterDB.Posts.Where(post => post.Publisher.Id == user.Id));
             foreach (TwitterUser followee in user.Following.ToList())
@@ -28,12 +29,12 @@ namespace Twitter.Controllers
             return View(postFeed);
         }
 
-        public ActionResult Follow(TwitterUser user)
-        {
-            TwitterDB.Users.Find(Membership.GetUser().ProviderUserKey.ToString()).Following.Add(user);
-            TwitterDB.SaveChanges();
-            return View();
-        }
+        //public ActionResult Follow(TwitterUser user)
+        //{
+        //    TwitterDB.Users.Find(Membership.GetUser().ProviderUserKey.ToString()).Following.Add(user);
+        //    TwitterDB.SaveChanges();
+        //    return View();
+        //}
 
         [AllowAnonymous]
         public ActionResult Login()
@@ -42,30 +43,27 @@ namespace Twitter.Controllers
         }
 
         [HttpPost]
-        public ActionResult Follow(string ID)
+        public ActionResult Follow(string FolloweeID)
         {
-            TwitterUser Following = TwitterDB.Users.Find(ID);
-            TwitterUser Follower = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            TwitterDB.Users.Find(Following.Id).Following.Add(TwitterDB.Users.Find(Follower.Id));
-            //Following.Following.Add(Follower);
-            //Follower.Followers.Add(Following);
+            string FollowerID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            TwitterUser Followed = TwitterDB.Users.SingleOrDefault(x => x.Id == FolloweeID);
+            TwitterUser Follower = TwitterDB.Users.SingleOrDefault(x => x.Id == FollowerID);
+            Follower = TwitterDB.Users.SingleOrDefault(x => x.Id == Follower.Id);
+            Follower.Following.Add(Followed);
             TwitterDB.SaveChanges();
-            return PartialView("Unfollow", ID);
+            return PartialView("Unfollow", FollowerID);
         }
 
         [HttpPost]
-        public ActionResult Unfollow(string ID)
+        public ActionResult Unfollow(string FolloweeID)
         {
-            TwitterUser Following = TwitterDB.Users.Find(ID);
-            TwitterUser Follower = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            TwitterDB.Users.Find(Following.Id).Following.Remove(Follower);
-            // Following.Following.Remove(Follower);
-            TwitterDB.Users.Find(Follower.Id).Followers.Remove(Following);
-            //Follower.Followers.Remove(Following);
-            //TwitterDB.Users.Attach(Following);
-            //TwitterDB.Users.Attach(Follower);
+            string FollowerID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            TwitterUser Followed = TwitterDB.Users.SingleOrDefault(x => x.Id == FolloweeID);
+            TwitterUser Follower = TwitterDB.Users.SingleOrDefault(x => x.Id == FollowerID);
+            Follower = TwitterDB.Users.SingleOrDefault(x => x.Id == Follower.Id);
+            Follower.Following.Remove(Followed);
             TwitterDB.SaveChanges();
-            return PartialView("Follow", ID);
+            return PartialView("Follow", FolloweeID);
         }
     }
 }
